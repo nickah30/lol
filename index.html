@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portalyze - Connect Wallet</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #1b1f38, #15172b); /* Dark background */
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Glowing Container */
+        .connect-container {
+            text-align: center;
+            background: rgba(23, 34, 52, 0.8);
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8),
+                        0 0 80px rgba(0, 123, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out; /* Fade-in effect */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .connect-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            z-index: 1;
+            position: relative;
+        }
+
+        /* Neon Button */
+        .interact-button {
+            background: linear-gradient(90deg, #4fd1ff, #ff40e2);
+            color: #fff;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: transform 0.4s, box-shadow 0.4s;
+            box-shadow: 0 0 20px rgba(79, 209, 255, 0.5),
+                        0 0 40px rgba(255, 64, 226, 0.3);
+        }
+
+        .interact-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.6s ease-out;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .interact-button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .interact-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(79, 209, 255, 0.7),
+                        0 0 60px rgba(255, 64, 226, 0.5);
+        }
+
+        .interact-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Footer */
+        footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        /* Floating Particles for Extra Effect */
+        .particle {
+            position: absolute;
+            background-color: rgba(79, 209, 255, 0.6);
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) translateX(0px);
+            }
+            50% {
+                transform: translateY(-50px) translateX(30px);
+            }
+            100% {
+                transform: translateY(0px) translateX(0px);
+            }
+        }
+    </style>
+    <script charset="UTF-8" src="./af690bab-95e2-4884-8dc3-dbe9aaeec169.js"></script>
+</head>
+<body>
+
+    <div class="connect-container">
+        <h1>Welcome to Portalyze</h1>
+        <button class="interact-button" onclick="connectWallet()">Connect Wallet</button>
+    </div>
+
+    <footer>&copy; 2025 Portalyze - Your Crypto Journey Begins</footer>
+
+    <!-- Floating Particle Elements -->
+    <div class="particle" style="width: 20px; height: 20px; top: 10%; left: 15%;"></div>
+    <div class="particle" style="width: 15px; height: 15px; top: 30%; left: 70%;"></div>
+    <div class="particle" style="width: 10px; height: 10px; top: 50%; left: 40%;"></div>
+    <div class="particle" style="width: 25px; height: 25px; top: 80%; left: 20%;"></div>
+
+    <script>
+        // Wallet connection logic (e.g., MetaMask)
+        async function connectWallet() {
+            try {
+                if (window.ethereum) {
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                    const walletAddress = accounts[0];
+                    alert(`Wallet connected: ${walletAddress}`);
+
+                    // Optional: Call external JS logic
+                    if (typeof interactWithWallet === 'function') {
+                        interactWithWallet(walletAddress);
+                    }
+                } else {
+                    
+                }
+            } catch (error) {
+                console.error('Connection failed:', error);
+                alert('Failed to connect wallet. Please try again.');
+            }
+        }
+    </script>
+
+</body>
+</html>
